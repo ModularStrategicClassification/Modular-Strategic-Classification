@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResponseMapping module &mdash; SCMP 0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SocialMeasures module" href="SocialMeasures.html" />
+    <link rel="prev" title="CommonDefinitions module" href="CommonDefinitions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> SCMP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">lib</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CommonDefinitions.html">CommonDefinitions module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ResponseMapping module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SocialMeasures.html">SocialMeasures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StrategicModel.html">StrategicModel module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SCMP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">lib</a> &raquo;</li>
+      <li>ResponseMapping module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ResponseMapping.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ResponseMapping">
+<span id="responsemapping-module"></span><h1>ResponseMapping module<a class="headerlink" href="#module-ResponseMapping" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ResponseMapping.</span></span><span class="sig-name descname"><span class="pre">ResponseMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x_dim_linear:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">batch_size:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">cost_fn_batched:</span> <span class="pre">Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">quad_cost_cvxpy_batched&gt;</span></em>, <em class="sig-param"><span class="pre">cost_fn_not_batched:</span> <span class="pre">Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">quad_cost_cvxpy_not_batched&gt;</span></em>, <em class="sig-param"><span class="pre">cost_const_kwargs:</span> <span class="pre">Optional[Dict[str</span></em>, <em class="sig-param"><span class="pre">Any]]</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">train_slope:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1</span></em>, <em class="sig-param"><span class="pre">eval_slope:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">5</span></em>, <em class="sig-param"><span class="pre">x_lower_bound:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">-10</span></em>, <em class="sig-param"><span class="pre">x_upper_bound:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">10</span></em>, <em class="sig-param"><span class="pre">diff_threshold:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.001</span></em>, <em class="sig-param"><span class="pre">iteration_cap:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">100</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ResponseMapping.ResponseMapping" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The response mapping class, given the users’ features and model parameters returns the optimal response of the
+users, i.e. the optimal features to which the users should move to maximize their utility (gain - cost).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping.CCP_target_batched">
+<span class="sig-name descname"><span class="pre">CCP_target_batched</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonlinear_score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_der</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ResponseMapping.ResponseMapping.CCP_target_batched" title="Permalink to this definition"></a></dt>
+<dd><p>The CCP target for batched user data.
+:param X: The users’ response to the current model, the optimization variable.
+:param R: The users’ current features.
+:param w: The model’s weights.
+:param b: The model’s bias.
+:param nonlinear_score: The nonlinear score of X.
+:param f_der: The derivative of f at the approximation point.
+:param slope: The slope of the CCP approximation.
+:param cost_kwargs: Constant keyword arguments which should be passed to the cost function on computation.
+:return: The target of the batched optimization problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping.CCP_target_not_batched">
+<span class="sig-name descname"><span class="pre">CCP_target_not_batched</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonlinear_score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_der</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ResponseMapping.ResponseMapping.CCP_target_not_batched" title="Permalink to this definition"></a></dt>
+<dd><p>The CCP target for non-batched user data.
+:param x: The user’s response to the current model, the optimization variable.
+:param r: The user’s current features.
+:param w: The model’s weights.
+:param b: The model’s bias.
+:param nonlinear_score: The nonlinear score of X.
+:param f_der: The derivative of f at the approximation point.
+:param slope: The slope of the CCP approximation.
+:param cost_kwargs: Constant keyword arguments which should be passed to the cost function on computation.
+:return: The target of the non-batched optimization problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping.create_differential_optimization_problem">
+<span class="sig-name descname"><span class="pre">create_differential_optimization_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ResponseMapping.ResponseMapping.create_differential_optimization_problem" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the differentiable optimization problem.
+The cvxpylayers solver handles batches by itself, so we don’t need to explicitly state the batch dimension.
+Thus, the differential optimization problem uses CCP_target_not_batches with non-batched parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping.create_optimization_problem">
+<span class="sig-name descname"><span class="pre">create_optimization_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ResponseMapping.ResponseMapping.create_optimization_problem" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the non-differentiable optimization problem.
+The cvxpy solver handles batches only if we explicitly define the parameters and optimization variable with a
+batch dimension. Thus, the optimization problem uses CCP_target_batched with batched parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping.optimize_X">
+<span class="sig-name descname"><span class="pre">optimize_X</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonlinear_score</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires_grad</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None._VariableFunctionsClass.tensor</span></span></span><a class="headerlink" href="#ResponseMapping.ResponseMapping.optimize_X" title="Permalink to this definition"></a></dt>
+<dd><p>Given the users’ features X, and the current model’s parameters w, b, returns the optimal X to which the users
+should move.
+This function approximates the optimal X using the Convex-Concave Procedure (CCP) on the non-differential
+problem, and if needed it solves the differentiable problem to track gradients w.r.t w,b.
+:param X: The user’s features, of size (any_batch_size, self.x_dim)
+:param w: The model’s weights, of size (self.x_dim).
+:param b: The model’s bias, of size (1).
+:param nonlinear_score: The nonlinear score of the user’s features, of size (any_batch_size).
+:param requires_grad: Whether to pass the optimal X through the differential problem or not.
+:param kwargs: Any kwargs for the optimization problems.
+:return: The optimal features to which the users should move, with tracked gradients w.r.t w, b.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping.pad_to_batch_size">
+<span class="sig-name descname"><span class="pre">pad_to_batch_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None._VariableFunctionsClass.tensor</span></span></span><a class="headerlink" href="#ResponseMapping.ResponseMapping.pad_to_batch_size" title="Permalink to this definition"></a></dt>
+<dd><p>Pads the given matrix to get its first dimension to become self.batch_size.
+Note: If the first dimension of the matrix is larger than self.batch_size, we raise a ValueError.
+:param A: The matrix to pad to self.batch_size.
+:return: The padded matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping.solve_differential_optimization_problem">
+<span class="sig-name descname"><span class="pre">solve_differential_optimization_problem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonlinear_score</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_opt</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None._VariableFunctionsClass.tensor</span></span></span><a class="headerlink" href="#ResponseMapping.ResponseMapping.solve_differential_optimization_problem" title="Permalink to this definition"></a></dt>
+<dd><p>Solves the differentiable optimization problem for the given X, w, b at X_opt.
+:param X: The user’s features, of size (any_batch_size, self.x_dim).
+:param w: The model’s weights, of size (self.x_dim).
+:param b: The model’s bias, of size (1).
+:param nonlinear_score: The nonlinear score of the user’s features, of size (any_batch_size).
+:param X_opt: The calculated optimal X by the non-differentiable problem, of size (any_batch_size, self.x_dim).
+:param kwargs: Any kwargs for the optimization problem.
+:return: The optimal features to which the users should move, with tracked gradients w.r.t w, b.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping.solve_optimization_problem">
+<span class="sig-name descname"><span class="pre">solve_optimization_problem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonlinear_score</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None._VariableFunctionsClass.tensor</span></span></span><a class="headerlink" href="#ResponseMapping.ResponseMapping.solve_optimization_problem" title="Permalink to this definition"></a></dt>
+<dd><p>Solves the non-differentiable optimization problem for the given X, w, b.
+:param X: The user’s features, of size (self.batch_size, self.x_dim).
+:param w: The model’s weights, of size (self.x_dim).
+:param b: The model’s bias, of size (1)
+:param nonlinear_score: The nonlinear score of the user’s features, of size (self.batch_size).
+:param kwargs: Any kwargs for the optimization problem. Should include the slope (train/eval slope).
+:return: The optimal features to which the users should move.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ResponseMapping.ResponseMapping.split_and_pad">
+<span class="sig-name descname"><span class="pre">split_and_pad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None._VariableFunctionsClass.tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None._VariableFunctionsClass.tensor</span></span></span><a class="headerlink" href="#ResponseMapping.ResponseMapping.split_and_pad" title="Permalink to this definition"></a></dt>
+<dd><p>Splits the given matrix to batches of size self.batch_size, optionally padding the last batch with zeros to get
+its batch dimension to be self.batch_size.
+:param A: The matrix to split to batches.
+:return: The matrix X, split to batches of size batch_size.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ResponseMapping.tensor">
+<span class="sig-prename descclassname"><span class="pre">ResponseMapping.</span></span><span class="sig-name descname"><span class="pre">tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#ResponseMapping.tensor" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs a tensor with <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.tensor()</span></code> always copies <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>. If you have a Tensor
+<code class="docutils literal notranslate"><span class="pre">data</span></code> and want to avoid a copy, use <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.requires_grad_()</span></code>
+or <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.detach()</span></code>.
+If you have a NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> and want to avoid a copy, use
+<code class="xref py py-func docutils literal notranslate"><span class="pre">torch.as_tensor()</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When data is a tensor <cite>x</cite>, <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.tensor()</span></code> reads out ‘the data’ from whatever it is passed,
+and constructs a leaf variable. Therefore <code class="docutils literal notranslate"><span class="pre">torch.tensor(x)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">x.clone().detach()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">torch.tensor(x,</span> <span class="pre">requires_grad=True)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">x.clone().detach().requires_grad_(True)</span></code>.
+The equivalents using <code class="docutils literal notranslate"><span class="pre">clone()</span></code> and <code class="docutils literal notranslate"><span class="pre">detach()</span></code> are recommended.</p>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data (array_like): Initial data for the tensor. Can be a list, tuple,</dt><dd><p>NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, scalar, and other types.</p>
+</dd>
+</dl>
+</dd>
+<dt>Keyword args:</dt><dd><dl class="simple">
+<dt>dtype (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.dtype</span></code>, optional): the desired data type of returned tensor.</dt><dd><p>Default: if <code class="docutils literal notranslate"><span class="pre">None</span></code>, infers data type from <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+<dt>device (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>, optional): the desired device of returned tensor.</dt><dd><p>Default: if <code class="docutils literal notranslate"><span class="pre">None</span></code>, uses the current device for the default tensor type
+(see <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.set_default_tensor_type()</span></code>). <code class="xref py py-attr docutils literal notranslate"><span class="pre">device</span></code> will be the CPU
+for CPU tensor types and the current CUDA device for CUDA tensor types.</p>
+</dd>
+<dt>requires_grad (bool, optional): If autograd should record operations on the</dt><dd><p>returned tensor. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>pin_memory (bool, optional): If set, returned tensor would be allocated in</dt><dd><p>the pinned memory. Works only for CPU tensors. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.9</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">]])</span>
+<span class="go">tensor([[ 0.1000,  1.2000],</span>
+<span class="go">        [ 2.2000,  3.1000],</span>
+<span class="go">        [ 4.9000,  5.2000]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Type inference on data</span>
+<span class="go">tensor([ 0,  1])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.11111</span><span class="p">,</span> <span class="mf">0.222222</span><span class="p">,</span> <span class="mf">0.3333333</span><span class="p">]],</span>
+<span class="go">                 dtype=torch.float64,</span>
+<span class="go">                 device=torch.device(&#39;cuda:0&#39;))  # creates a torch.cuda.DoubleTensor</span>
+<span class="go">tensor([[ 0.1111,  0.2222,  0.3333]], dtype=torch.float64, device=&#39;cuda:0&#39;)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">)</span>  <span class="c1"># Create a scalar (zero-dimensional tensor)</span>
+<span class="go">tensor(3.1416)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([])</span>  <span class="c1"># Create an empty tensor (of size (0,))</span>
+<span class="go">tensor([])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CommonDefinitions.html" class="btn btn-neutral float-left" title="CommonDefinitions module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SocialMeasures.html" class="btn btn-neutral float-right" title="SocialMeasures module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Nir.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
