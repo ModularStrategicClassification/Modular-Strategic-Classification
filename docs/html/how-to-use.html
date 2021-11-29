@@ -137,7 +137,7 @@ Furthermore, validation data can be sent together with training data to enjoy sm
 <li><p><strong>Quick stop</strong> will stop the model from learning if it hasn’t got any better in 4 consecutive epochs.</p></li>
 </ul>
 </div></blockquote>
-<p><a href="#id1"><span class="problematic" id="id2">|:Warning:|</span></a> While not a classic data preparation, please notice the cost function is sensitive to scale. You can either scale the params or scale the cost function using the <cite>scale</cite> param.</p>
+<p>⚠️ While not a classic data preparation, please notice the cost function is sensitive to scale. You can either scale the params or scale the cost function using the <cite>scale</cite> param.</p>
 </div>
 <div class="section" id="out-of-the-box-strategic-classification">
 <h2>Out of the box Strategic Classification<a class="headerlink" href="#out-of-the-box-strategic-classification" title="Permalink to this headline">¶</a></h2>
@@ -165,8 +165,8 @@ For example, if you wish to look for a proper scale to a quadratic cost function
 <div class="section" id="add-ons">
 <h2>Add ons<a class="headerlink" href="#add-ons" title="Permalink to this headline">¶</a></h2>
 <p>While Plato is highly modifiable, in its heart there is a linear classifier, and you would maybe want to have another model there or to have the linear model do something beyond the suggested.
-Plato framework is built in a modular way and with lots of abstraction, so if you wish to use another model, you can easily takes pieces.
-⚠️ To ensure the response mapper solves a concave problem, the classification model must be linear on the gameable features.</p>
+Plato framework is built in a modular way and with lots of abstraction, so if you wish to use another model, you can easily takes pieces.</p>
+<p>⚠️ To ensure the response mapper solves a concave problem, the classification model must be linear on the gameable features.</p>
 <p>To see an example, please visit at <a class="reference internal" href="code.html"><span class="doc">Code</span></a> the flexibility section, in which we demonstrate how we override the basic model to create a model who is not passively classifying but affects the costs.</p>
 </div>
 </div>
