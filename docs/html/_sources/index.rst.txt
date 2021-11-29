@@ -1,17 +1,30 @@
-.. SCMP documentation master file, created by
-   sphinx-quickstart on Tue Nov  9 00:00:45 2021.
+.. Plato - Strategic Classification Made Practical documentation master file, created by
+   sphinx-quickstart on Sat Nov 27 20:11:15 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to SCMP's documentation!
-================================
+.. image:: _static/Plato_Codes.png
+
+Welcome to Plato - Strategic Classification Made Practical's documentation!
+===========================================================================
+
+Overview
+---------
+Welcome to Plato – currently a practical strategic classification framework with the aspiration to expand into everything which is a machine learning human interactions tool kit |:man:| |:heart:| |:robot:|
+ 
+Plato is based on Sagi Levanon and Nir Rosenfeld's `\"Strategic Classification Made Practical\"`_ paper and implements the suggested model in an easy-to-use, fast, and modular-to-change manner.
+
+.. _`\"Strategic Classification Made Practical\"`: https://arxiv.org/pdf/2103.01826.pdf
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
    
-   modules
+   how-to-use
+   examples
+   code
 
+   
 
 
 Indices and tables

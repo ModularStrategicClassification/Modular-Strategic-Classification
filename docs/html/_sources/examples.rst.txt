@@ -1,0 +1,18 @@
+========
+Examples
+========
+
+Here you can find a few usage examples in the form of Jupyter notebooks which implement the variety of suggested experiments in the original paper. 
+ 
+.. toctree::
+
+	Vanilla
+	VanillaVsHardt
+	Recourse
+	Burden
+	Utility
+	Flexibility
+	PlatoDemo
+
+
+   

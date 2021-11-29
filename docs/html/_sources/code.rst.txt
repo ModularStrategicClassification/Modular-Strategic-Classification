@@ -1,0 +1,22 @@
+====
+Code
+====
+
+StrategicModel
+--------------
+   
+.. automodule:: StrategicModel
+   :members:
+   
+ResponseMapping
+---------------
+
+.. automodule:: ResponseMapping
+   :members:
+   
+Add-ons | Flexibility
+----------------------
+
+.. automodule:: Flexibility
+   :members:
+   

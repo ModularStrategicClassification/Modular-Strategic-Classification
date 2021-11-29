@@ -1,0 +1,73 @@
+=========
+Tutorial
+=========
+
+Plato is built to serve users in multiple expertise levels, from using the default parameters up to utilizing the modular design and taking only parts while overriding the others. 
+Here are some instractions and examples on how to use the package. Full usage examples are listed under the *"examples"* section, while the full code is avilable on GitHub and documented on the *"code"* section.
+
+Required Imports
+----------------
+Strategic classification has two parts, and accordingly Plato is based on two main frameworks:
+
+- **Classification logic** is built upon PyTorch framework, so `import torch` will be required 
+- **Strategic behavior** by the user is modeled through a convex problem and solved using CVXPY. While you can avoid using CVXPY framework utilizing our pre-built cost functions, you will need to `import cvxpy`  if you wish to create your own cost function.   
+
+Furthermore, Plato saves model and results into your enviorment, for that `import os` is used.
+To summrize, the import and defention section would look like::
+	import os
+	import torch
+	import numpy as np
+	import cvxpy as cp
+	import pandas as pd
+
+	from lib.StrategicModel import StrategicModel
+
+	PATH = "./Results/vanilla_vs_hardt_orig"
+	if not os.path.exists(PATH):
+		os.makedirs(PATH)
+
+
+Data Prepration
+---------------
+There is no spiceal data prepration required for Plato. The framework expects to recive the data and the labels in two different tensors.
+Furthermore, validation data can be sent together with training data to enjoy smart saving and quick stop mechanisem. 
+	- **Smart saving** will save the epoch's learning only if the accuracy on validation increased.
+	- **Quick stop** will stop the model from learning if it hasn't got any better in 4 consecutive epochs.
+
+|:Warning:| While not a classic data preparation, please notice the cost function is sensitive to scale. You can either scale the params or scale the cost function using the `scale` param.
+
+
+Out of the box Strategic Classification
+---------------------------------------
+
+If you wish to use Plato in the most basic form presented in the paper, Plato has all the parameters pre-defined and ready to run out of the box.
+You will need to define a Plato model, and then fit model by providing the data::
+
+	plato_model = StrategicModel(x_dim, batch_size)
+    plato_model.fit(X, Y, Xval, Yval)
+	
+`x_dim` is the dimension of your data, `batch_size` is the batch sizes you need for training.
+
+Modifiable Strategic Classification
+------------------------------------
+
+The power of Plato is that it is highly modifable Strategic Classification with planty of pre-built options.  
+For example, if you wish to look for a proper scale to a quadratic cost function, and control the learning mechanism optimizer and step size, your code can look like the following::
+
+	scales = [0.5, 1, 2]
+	for scale in scales:
+		plato_model = StrategicModel(x_dim, batch_size, cost_fn="quad", cost_const_kwargs={"scale": scale})
+		plato_model.fit(X, Y, Xval, Yval, opt_class=torch.optim.Adam, opt_kwargs={"lr": 1e-1},
+                                epochs=epochs, verbose="epochs", path=PATH, model_name=model_name)
+
+You can visit the :doc:`code` section to see all the parameters and their default definitions. 
+
+
+Add ons
+-------
+
+While Plato is highly modifiable, in its heart there is a linear classifier, and you would maybe want to have another model there or to have the linear model do something beyond the suggested. 
+Plato framework is built in a modular way and with lots of abstraction, so if you wish to use another model, you can easily takes pieces. 
+|:warning:| To ensure the response mapper solves a concave problem, the classification model must be linear on the gameable features.
+
+To see an example, please visit at :doc:`code` the flexibility section, in which we demonstrate how we override the basic model to create a model who is not passively classifying but affects the costs.

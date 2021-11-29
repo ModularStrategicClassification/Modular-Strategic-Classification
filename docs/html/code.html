@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code &mdash; Plato - Strategic Classification Made Practical 0.9 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Vanilla vs Hardt" href="VanillaVsHardt_orig.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Plato - Strategic Classification Made Practical
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="how-to-use.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-StrategicModel">StrategicModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ResponseMapping">ResponseMapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-Flexibility">Add-ons | Flexibility</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Plato - Strategic Classification Made Practical</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Code</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/code.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="code">
+<h1>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-StrategicModel">
+<span id="strategicmodel"></span><h2>StrategicModel<a class="headerlink" href="#module-StrategicModel" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="StrategicModel.StrategicModel">
+<em class="property">class </em><code class="sig-prename descclassname">StrategicModel.</code><code class="sig-name descname">StrategicModel</code><span class="sig-paren">(</span><em class="sig-param">x_dim: int</em>, <em class="sig-param">batch_size: int</em>, <em class="sig-param">loss_fn: Callable = &lt;function hinge_loss&gt;</em>, <em class="sig-param">cost_fn: Union[str</em>, <em class="sig-param">Callable] = 'quad'</em>, <em class="sig-param">cost_fn_not_batched: Optional[Callable] = None</em>, <em class="sig-param">cost_fn_torch: Optional[Callable] = None</em>, <em class="sig-param">cost_const_kwargs: Optional[Dict[str</em>, <em class="sig-param">Any]] = None</em>, <em class="sig-param">nonlinear_transformation_indices: Optional[List[int]] = None</em>, <em class="sig-param">nonlinear_transformation_fn: Optional[Callable] = None</em>, <em class="sig-param">nonlinear_transformation_output_dimension: int = -1</em>, <em class="sig-param">utility_reg: Optional[float] = None</em>, <em class="sig-param">burden_reg: Optional[float] = None</em>, <em class="sig-param">recourse_reg: Optional[float] = None</em>, <em class="sig-param">social_measure_dict: Optional[Dict] = None</em>, <em class="sig-param">train_slope: float = 1</em>, <em class="sig-param">eval_slope: float = 5</em>, <em class="sig-param">x_lower_bound: float = -10</em>, <em class="sig-param">x_upper_bound: float = 10</em>, <em class="sig-param">diff_threshold: float = 0.001</em>, <em class="sig-param">iteration_cap: int = 100</em>, <em class="sig-param">strategic: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#StrategicModel.StrategicModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>The strategic model class, which learns a linear classifier that takes into account <em>gaming</em> of users.
+I.e. users change their features to maximize their utility, which is defined to be their gain minus the cost of the change.</p>
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.calc_accuracy">
+<em class="property">static </em><code class="sig-name descname">calc_accuracy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Y</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y_pred</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#StrategicModel.StrategicModel.calc_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the accuracy of the prediction Y_pred w.r.t the ground-truth classes Y.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Y</strong> – The ground-truth classes.</p></li>
+<li><p><strong>Y_pred</strong> – The prediction of the model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The accuracy of the prediction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.evaluate">
+<code class="sig-name descname">evaluate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X_opt</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">strategic_data</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#StrategicModel.StrategicModel.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a pair (X, Y) of features and their corresponding classes, returns the accuracy of the strategic model’s
+classification on X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The users’ features.</p></li>
+<li><p><strong>Y</strong> – The users’ classes</p></li>
+<li><p><strong>strategic_data</strong> – Whether to speculate gaming or not (practically, whether to optimize X or not).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The accuracy of the strategic model’s classification on X.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X: None._VariableFunctionsClass.tensor</em>, <em class="sig-param">Y: None._VariableFunctionsClass.tensor</em>, <em class="sig-param">Xval: Optional[None._VariableFunctionsClass.tensor] = None</em>, <em class="sig-param">Yval: Optional[None._VariableFunctionsClass.tensor] = None</em>, <em class="sig-param">opt_class: Type[torch.optim.optimizer.Optimizer] = &lt;class 'torch.optim.adam.Adam'&gt;</em>, <em class="sig-param">opt_kwargs: Dict = None</em>, <em class="sig-param">shuffle: bool = False</em>, <em class="sig-param">epochs: int = 100</em>, <em class="sig-param">epochs_without_improvement_cap: int = 4</em>, <em class="sig-param">verbose: Optional[str] = 'batches'</em>, <em class="sig-param">save_progress: bool = False</em>, <em class="sig-param">path: Optional[str] = None</em>, <em class="sig-param">model_name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#StrategicModel.StrategicModel.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the model on the input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The training set.</p></li>
+<li><p><strong>Y</strong> – The training classes.</p></li>
+<li><p><strong>Xval</strong> – The validation set.</p></li>
+<li><p><strong>Yval</strong> – The validation labels.</p></li>
+<li><p><strong>opt_class</strong> – The class of the optimizer used in the training.</p></li>
+<li><p><strong>opt_kwargs</strong> – Any keyword arguments to be passed to the optimizer. Default value: {“lr”: 5e-1}.</p></li>
+<li><p><strong>shuffle</strong> – Whether to shuffle the training and validation sets in the training.</p></li>
+<li><p><strong>epochs</strong> – The amount of epochs to train the model.</p></li>
+<li><p><strong>epochs_without_improvement_cap</strong> – The cap on the amount of epochs in which the model doesn’t improve (i.e. doesn’t
+increase its accuracy on the validation set).</p></li>
+<li><p><strong>verbose</strong> – Whether to write messages during the training process. Set to “batches” to write at the end of every
+batch and epoch, “epochs” to write at the end of every epoch, or None to write only at the end of the training
+process.</p></li>
+<li><p><strong>save_progress</strong> – Whether to save the progress of the model during training. One must supply path and model_name
+to save the model’s progress.</p></li>
+<li><p><strong>path</strong> – A path to a directory in which the model will be saved. Can be None, in this case, the model will not be
+saved to a file.</p></li>
+<li><p><strong>model_name</strong> – The model’s name, used for saving.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">requires_grad</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>None._VariableFunctionsClass.tensor<span class="p">, </span>None._VariableFunctionsClass.tensor<span class="p">]</span><a class="headerlink" href="#StrategicModel.StrategicModel.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the score of the given input X, with respect to the current model’s parameters (w, b). Also returns the
+optimal X to which the input should move to maximize its utility (returns X if the model is not strategic).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The input to calculate its score.</p></li>
+<li><p><strong>requires_grad</strong> – Whether the result should track gradients w.r.t the model’s parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The score and optimal response of the input.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.get_batch_data_for_saving">
+<code class="sig-name descname">get_batch_data_for_saving</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">epoch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X_opt</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y_pred</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#StrategicModel.StrategicModel.get_batch_data_for_saving" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the batch data in the saving format (dictionary of entries to save for each row in X, X_opt, etc.).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epoch</strong> – The epoch number.</p></li>
+<li><p><strong>batch</strong> – The batch number.</p></li>
+<li><p><strong>X</strong> – The users’ features.</p></li>
+<li><p><strong>X_opt</strong> – The users’ responses.</p></li>
+<li><p><strong>Y</strong> – The users’ ground-truth classes.</p></li>
+<li><p><strong>Y_pred</strong> – The model’s prediction of the users’ classes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The data in the saving format.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.get_filename">
+<em class="property">static </em><code class="sig-name descname">get_filename</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">suffix</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">extension</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#StrategicModel.StrategicModel.get_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the file name of the file with the given path, name, suffix and extension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – The directory of the file.</p></li>
+<li><p><strong>name</strong> – The name of the file.</p></li>
+<li><p><strong>suffix</strong> – The suffix of the file (comes after the name).</p></li>
+<li><p><strong>extension</strong> – The extension of the file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The full filename to the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.load_model">
+<code class="sig-name descname">load_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">model_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">print_message</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#StrategicModel.StrategicModel.load_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the model from the specified path with the given name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – The directory from which the model will be loaded.</p></li>
+<li><p><strong>model_name</strong> – The model’s name.</p></li>
+<li><p><strong>print_message</strong> – Whether to print a message that the model was loaded.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Whether the model was loaded.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.loss">
+<code class="sig-name descname">loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Y</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y_pred</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X_opt</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#StrategicModel.StrategicModel.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the loss of the model’s prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Y</strong> – The real classification of the input.</p></li>
+<li><p><strong>Y_pred</strong> – The model’s classification of the input.</p></li>
+<li><p><strong>X</strong> – The input.</p></li>
+<li><p><strong>X_opt</strong> – The response of the input, as computed in the forward step.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The loss of the model’s classification.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.nonlinear_score">
+<code class="sig-name descname">nonlinear_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#StrategicModel.StrategicModel.nonlinear_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the nonlinear part of the score of the given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> – The input to calculate its nonlinear score.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nonlinear score of X.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.normalize_parameters">
+<code class="sig-name descname">normalize_parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#StrategicModel.StrategicModel.normalize_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the model’s parameters (w, b).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.optimize_X">
+<code class="sig-name descname">optimize_X</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">requires_grad</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#StrategicModel.StrategicModel.optimize_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given the users’ features X, returns the optimal X to which the users should move. Directly calls the response
+mapping’s optimize_X method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The users’ features.</p></li>
+<li><p><strong>requires_grad</strong> – Whether the results should track gradients w.r.t the model’s parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The optimal response for X w.r.t the current model parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.print_batch_info">
+<code class="sig-name descname">print_batch_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">epoch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">epochs</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">batches</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">train_losses</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">train_errors</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#StrategicModel.StrategicModel.print_batch_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints info about the train batch after it is done.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epoch</strong> – The epoch number (starting at 0).</p></li>
+<li><p><strong>epochs</strong> – The number of epochs.</p></li>
+<li><p><strong>batch</strong> – The batch number (starting at 0).</p></li>
+<li><p><strong>batches</strong> – The number of batches.</p></li>
+<li><p><strong>train_losses</strong> – The train losses up to this point.</p></li>
+<li><p><strong>train_errors</strong> – The train errors up to this point.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.print_epoch_info">
+<code class="sig-name descname">print_epoch_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">epoch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">epochs</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">epoch_time</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">validation_losses</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">validation_errors</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#StrategicModel.StrategicModel.print_epoch_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints info about the epoch after it is done.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epoch</strong> – The epoch number (starting at 0).</p></li>
+<li><p><strong>epochs</strong> – The number of epochs.</p></li>
+<li><p><strong>epoch_time</strong> – The time the epoch took.</p></li>
+<li><p><strong>validation_losses</strong> – The validation losses up to this point.</p></li>
+<li><p><strong>validation_errors</strong> – The validation errors up to this point.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.save_batch_progress">
+<code class="sig-name descname">save_batch_progress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">epoch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X_opt</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y_pred</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">model_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#StrategicModel.StrategicModel.save_batch_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the progress of the given batch into the already created csv data file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epoch</strong> – The epoch number.</p></li>
+<li><p><strong>batch</strong> – The batch number.</p></li>
+<li><p><strong>X</strong> – The users’ features.</p></li>
+<li><p><strong>X_opt</strong> – The users’ responses.</p></li>
+<li><p><strong>Y</strong> – The users’ ground-truth classes.</p></li>
+<li><p><strong>Y_pred</strong> – The model’s prediction of the users’ classes.</p></li>
+<li><p><strong>path</strong> – The directory in which we save the data.</p></li>
+<li><p><strong>model_name</strong> – The model’s name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.save_initial_data">
+<code class="sig-name descname">save_initial_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">model_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#StrategicModel.StrategicModel.save_initial_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the initial data of the model.
+If path or model_name is None, raises a ValueError (one must supply the path and model name in order to save data).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – The directory in which we save the data.</p></li>
+<li><p><strong>model_name</strong> – The model’s name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.save_model">
+<code class="sig-name descname">save_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">model_name</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">print_message</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#StrategicModel.StrategicModel.save_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the model to the supplied path with the given name. If the path or name are not supplied, nothing happens.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – The directory in which the model will be saved.</p></li>
+<li><p><strong>model_name</strong> – The model’s name.</p></li>
+<li><p><strong>print_message</strong> – Whether to print a message that the model was saved.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="StrategicModel.StrategicModel.score">
+<code class="sig-name descname">score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#StrategicModel.StrategicModel.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the score of the given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> – The input to calculate its score.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The score of X.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="StrategicModel.tensor">
+<code class="sig-prename descclassname">StrategicModel.</code><code class="sig-name descname">tensor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">requires_grad</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">pin_memory</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Tensor<a class="headerlink" href="#StrategicModel.tensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a tensor with <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.tensor()</span></code> always copies <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>. If you have a Tensor
+<code class="docutils literal notranslate"><span class="pre">data</span></code> and want to avoid a copy, use <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.requires_grad_()</span></code>
+or <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.detach()</span></code>.
+If you have a NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> and want to avoid a copy, use
+<code class="xref py py-func docutils literal notranslate"><span class="pre">torch.as_tensor()</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When data is a tensor <cite>x</cite>, <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.tensor()</span></code> reads out ‘the data’ from whatever it is passed,
+and constructs a leaf variable. Therefore <code class="docutils literal notranslate"><span class="pre">torch.tensor(x)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">x.clone().detach()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">torch.tensor(x,</span> <span class="pre">requires_grad=True)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">x.clone().detach().requires_grad_(True)</span></code>.
+The equivalents using <code class="docutils literal notranslate"><span class="pre">clone()</span></code> and <code class="docutils literal notranslate"><span class="pre">detach()</span></code> are recommended.</p>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data (array_like): Initial data for the tensor. Can be a list, tuple,</dt><dd><p>NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, scalar, and other types.</p>
+</dd>
+</dl>
+</dd>
+<dt>Keyword args:</dt><dd><dl class="simple">
+<dt>dtype (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.dtype</span></code>, optional): the desired data type of returned tensor.</dt><dd><p>Default: if <code class="docutils literal notranslate"><span class="pre">None</span></code>, infers data type from <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+<dt>device (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>, optional): the desired device of returned tensor.</dt><dd><p>Default: if <code class="docutils literal notranslate"><span class="pre">None</span></code>, uses the current device for the default tensor type
+(see <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.set_default_tensor_type()</span></code>). <code class="xref py py-attr docutils literal notranslate"><span class="pre">device</span></code> will be the CPU
+for CPU tensor types and the current CUDA device for CUDA tensor types.</p>
+</dd>
+<dt>requires_grad (bool, optional): If autograd should record operations on the</dt><dd><p>returned tensor. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>pin_memory (bool, optional): If set, returned tensor would be allocated in</dt><dd><p>the pinned memory. Works only for CPU tensors. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.9</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">]])</span>
+<span class="go">tensor([[ 0.1000,  1.2000],</span>
+<span class="go">        [ 2.2000,  3.1000],</span>
+<span class="go">        [ 4.9000,  5.2000]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Type inference on data</span>
+<span class="go">tensor([ 0,  1])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.11111</span><span class="p">,</span> <span class="mf">0.222222</span><span class="p">,</span> <span class="mf">0.3333333</span><span class="p">]],</span>
+<span class="gp">... </span>             <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">device</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda:0&#39;</span><span class="p">))</span>  <span class="c1"># creates a torch.cuda.DoubleTensor</span>
+<span class="go">tensor([[ 0.1111,  0.2222,  0.3333]], dtype=torch.float64, device=&#39;cuda:0&#39;)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">)</span>  <span class="c1"># Create a scalar (zero-dimensional tensor)</span>
+<span class="go">tensor(3.1416)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([])</span>  <span class="c1"># Create an empty tensor (of size (0,))</span>
+<span class="go">tensor([])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ResponseMapping">
+<span id="responsemapping"></span><h2>ResponseMapping<a class="headerlink" href="#module-ResponseMapping" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="ResponseMapping.ResponseMapping">
+<em class="property">class </em><code class="sig-prename descclassname">ResponseMapping.</code><code class="sig-name descname">ResponseMapping</code><span class="sig-paren">(</span><em class="sig-param">x_dim_linear: int</em>, <em class="sig-param">batch_size: int</em>, <em class="sig-param">cost_fn_batched: Callable = &lt;function quad_cost_cvxpy_batched&gt;</em>, <em class="sig-param">cost_fn_not_batched: Callable = &lt;function quad_cost_cvxpy_not_batched&gt;</em>, <em class="sig-param">cost_const_kwargs: Dict[str</em>, <em class="sig-param">Any] = None</em>, <em class="sig-param">train_slope: float = 1</em>, <em class="sig-param">eval_slope: float = 5</em>, <em class="sig-param">x_lower_bound: float = -10</em>, <em class="sig-param">x_upper_bound: float = 10</em>, <em class="sig-param">diff_threshold: float = 0.001</em>, <em class="sig-param">iteration_cap: int = 100</em><span class="sig-paren">)</span><a class="headerlink" href="#ResponseMapping.ResponseMapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>The response mapping class, given the users’ features and model parameters returns the optimal response of the
+users, i.e. the optimal features to which the users should move to maximize their utility (gain - cost).</p>
+<dl class="py method">
+<dt id="ResponseMapping.ResponseMapping.CCP_target_batched">
+<code class="sig-name descname">CCP_target_batched</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">R</span></em>, <em class="sig-param"><span class="n">w</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">nonlinear_score</span></em>, <em class="sig-param"><span class="n">f_der</span></em>, <em class="sig-param"><span class="n">slope</span></em>, <em class="sig-param"><span class="n">cost_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ResponseMapping.ResponseMapping.CCP_target_batched" title="Permalink to this definition">¶</a></dt>
+<dd><p>The CCP target for batched user data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The users’ response to the current model, the optimization variable.</p></li>
+<li><p><strong>R</strong> – The users’ current features.</p></li>
+<li><p><strong>w</strong> – The model’s weights.</p></li>
+<li><p><strong>b</strong> – The model’s bias.</p></li>
+<li><p><strong>nonlinear_score</strong> – The nonlinear score of X.</p></li>
+<li><p><strong>f_der</strong> – The derivative of f at the approximation point.</p></li>
+<li><p><strong>slope</strong> – The slope of the CCP approximation.</p></li>
+<li><p><strong>cost_kwargs</strong> – Constant keyword arguments which should be passed to the cost function on computation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The target of the batched optimization problem.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ResponseMapping.ResponseMapping.CCP_target_not_batched">
+<code class="sig-name descname">CCP_target_not_batched</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">w</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">nonlinear_score</span></em>, <em class="sig-param"><span class="n">f_der</span></em>, <em class="sig-param"><span class="n">slope</span></em>, <em class="sig-param"><span class="n">cost_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ResponseMapping.ResponseMapping.CCP_target_not_batched" title="Permalink to this definition">¶</a></dt>
+<dd><p>The CCP target for non-batched user data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – The user’s response to the current model, the optimization variable.</p></li>
+<li><p><strong>r</strong> – The user’s current features.</p></li>
+<li><p><strong>w</strong> – The model’s weights.</p></li>
+<li><p><strong>b</strong> – The model’s bias.</p></li>
+<li><p><strong>nonlinear_score</strong> – The nonlinear score of X.</p></li>
+<li><p><strong>f_der</strong> – The derivative of f at the approximation point.</p></li>
+<li><p><strong>slope</strong> – The slope of the CCP approximation.</p></li>
+<li><p><strong>cost_kwargs</strong> – Constant keyword arguments which should be passed to the cost function on computation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The target of the non-batched optimization problem.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ResponseMapping.ResponseMapping.create_differential_optimization_problem">
+<code class="sig-name descname">create_differential_optimization_problem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#ResponseMapping.ResponseMapping.create_differential_optimization_problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the differentiable optimization problem.
+The cvxpylayers solver handles batches by itself, so we don’t need to explicitly state the batch dimension.
+Thus, the differential optimization problem uses CCP_target_not_batches with non-batched parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ResponseMapping.ResponseMapping.create_optimization_problem">
+<code class="sig-name descname">create_optimization_problem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#ResponseMapping.ResponseMapping.create_optimization_problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the non-differentiable optimization problem.
+The cvxpy solver handles batches only if we explicitly define the parameters and optimization variable with a
+batch dimension. Thus, the optimization problem uses CCP_target_batched with batched parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ResponseMapping.ResponseMapping.optimize_X">
+<code class="sig-name descname">optimize_X</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">w</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">b</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">nonlinear_score</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">requires_grad</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#ResponseMapping.ResponseMapping.optimize_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given the users’ features X, and the current model’s parameters w, b, returns the optimal X to which the users
+should move.
+This function approximates the optimal X using the Convex-Concave Procedure (CCP) on the non-differential
+problem, and if needed it solves the differentiable problem to track gradients w.r.t w,b.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The user’s features, of size (any_batch_size, self.x_dim)</p></li>
+<li><p><strong>w</strong> – The model’s weights, of size (self.x_dim).</p></li>
+<li><p><strong>b</strong> – The model’s bias, of size (1).</p></li>
+<li><p><strong>nonlinear_score</strong> – The nonlinear score of the user’s features, of size (any_batch_size).</p></li>
+<li><p><strong>requires_grad</strong> – Whether to pass the optimal X through the differential problem or not.</p></li>
+<li><p><strong>kwargs</strong> – Any kwargs for the optimization problems.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The optimal features to which the users should move, with tracked gradients w.r.t w, b.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ResponseMapping.ResponseMapping.pad_to_batch_size">
+<code class="sig-name descname">pad_to_batch_size</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#ResponseMapping.ResponseMapping.pad_to_batch_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pads the given matrix to get its first dimension to become self.batch_size.
+Note: If the first dimension of the matrix is larger than self.batch_size, we raise a ValueError.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>A</strong> – The matrix to pad to self.batch_size.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The padded matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ResponseMapping.ResponseMapping.solve_differential_optimization_problem">
+<code class="sig-name descname">solve_differential_optimization_problem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">w</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">b</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">nonlinear_score</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X_opt</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#ResponseMapping.ResponseMapping.solve_differential_optimization_problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the differentiable optimization problem for the given X, w, b at X_opt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The user’s features, of size (any_batch_size, self.x_dim).</p></li>
+<li><p><strong>w</strong> – The model’s weights, of size (self.x_dim).</p></li>
+<li><p><strong>b</strong> – The model’s bias, of size (1).</p></li>
+<li><p><strong>nonlinear_score</strong> – The nonlinear score of the user’s features, of size (any_batch_size).</p></li>
+<li><p><strong>X_opt</strong> – The calculated optimal X by the non-differentiable problem, of size (any_batch_size, self.x_dim).</p></li>
+<li><p><strong>kwargs</strong> – Any kwargs for the optimization problem.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The optimal features to which the users should move, with tracked gradients w.r.t w, b.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ResponseMapping.ResponseMapping.solve_optimization_problem">
+<code class="sig-name descname">solve_optimization_problem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">w</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">b</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">nonlinear_score</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#ResponseMapping.ResponseMapping.solve_optimization_problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the non-differentiable optimization problem for the given X, w, b.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The user’s features, of size (self.batch_size, self.x_dim).</p></li>
+<li><p><strong>w</strong> – The model’s weights, of size (self.x_dim).</p></li>
+<li><p><strong>b</strong> – The model’s bias, of size (1)</p></li>
+<li><p><strong>nonlinear_score</strong> – The nonlinear score of the user’s features, of size (self.batch_size).</p></li>
+<li><p><strong>kwargs</strong> – Any kwargs for the optimization problem. Should include the slope (train/eval slope).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The optimal features to which the users should move.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ResponseMapping.ResponseMapping.split_and_pad">
+<code class="sig-name descname">split_and_pad</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#ResponseMapping.ResponseMapping.split_and_pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the given matrix to batches of size self.batch_size, optionally padding the last batch with zeros to get
+its batch dimension to be self.batch_size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>A</strong> – The matrix to split to batches.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The matrix X, split to batches of size batch_size.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="ResponseMapping.tensor">
+<code class="sig-prename descclassname">ResponseMapping.</code><code class="sig-name descname">tensor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">requires_grad</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">pin_memory</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Tensor<a class="headerlink" href="#ResponseMapping.tensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a tensor with <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.tensor()</span></code> always copies <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>. If you have a Tensor
+<code class="docutils literal notranslate"><span class="pre">data</span></code> and want to avoid a copy, use <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.requires_grad_()</span></code>
+or <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.detach()</span></code>.
+If you have a NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> and want to avoid a copy, use
+<code class="xref py py-func docutils literal notranslate"><span class="pre">torch.as_tensor()</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When data is a tensor <cite>x</cite>, <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.tensor()</span></code> reads out ‘the data’ from whatever it is passed,
+and constructs a leaf variable. Therefore <code class="docutils literal notranslate"><span class="pre">torch.tensor(x)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">x.clone().detach()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">torch.tensor(x,</span> <span class="pre">requires_grad=True)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">x.clone().detach().requires_grad_(True)</span></code>.
+The equivalents using <code class="docutils literal notranslate"><span class="pre">clone()</span></code> and <code class="docutils literal notranslate"><span class="pre">detach()</span></code> are recommended.</p>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data (array_like): Initial data for the tensor. Can be a list, tuple,</dt><dd><p>NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, scalar, and other types.</p>
+</dd>
+</dl>
+</dd>
+<dt>Keyword args:</dt><dd><dl class="simple">
+<dt>dtype (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.dtype</span></code>, optional): the desired data type of returned tensor.</dt><dd><p>Default: if <code class="docutils literal notranslate"><span class="pre">None</span></code>, infers data type from <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+<dt>device (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>, optional): the desired device of returned tensor.</dt><dd><p>Default: if <code class="docutils literal notranslate"><span class="pre">None</span></code>, uses the current device for the default tensor type
+(see <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.set_default_tensor_type()</span></code>). <code class="xref py py-attr docutils literal notranslate"><span class="pre">device</span></code> will be the CPU
+for CPU tensor types and the current CUDA device for CUDA tensor types.</p>
+</dd>
+<dt>requires_grad (bool, optional): If autograd should record operations on the</dt><dd><p>returned tensor. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>pin_memory (bool, optional): If set, returned tensor would be allocated in</dt><dd><p>the pinned memory. Works only for CPU tensors. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.9</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">]])</span>
+<span class="go">tensor([[ 0.1000,  1.2000],</span>
+<span class="go">        [ 2.2000,  3.1000],</span>
+<span class="go">        [ 4.9000,  5.2000]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Type inference on data</span>
+<span class="go">tensor([ 0,  1])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.11111</span><span class="p">,</span> <span class="mf">0.222222</span><span class="p">,</span> <span class="mf">0.3333333</span><span class="p">]],</span>
+<span class="gp">... </span>             <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">device</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda:0&#39;</span><span class="p">))</span>  <span class="c1"># creates a torch.cuda.DoubleTensor</span>
+<span class="go">tensor([[ 0.1111,  0.2222,  0.3333]], dtype=torch.float64, device=&#39;cuda:0&#39;)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">)</span>  <span class="c1"># Create a scalar (zero-dimensional tensor)</span>
+<span class="go">tensor(3.1416)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([])</span>  <span class="c1"># Create an empty tensor (of size (0,))</span>
+<span class="go">tensor([])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Flexibility">
+<span id="add-ons-flexibility"></span><h2>Add-ons | Flexibility<a class="headerlink" href="#module-Flexibility" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="Flexibility.LinearFlexibleResponseMapping">
+<em class="property">class </em><code class="sig-prename descclassname">Flexibility.</code><code class="sig-name descname">LinearFlexibleResponseMapping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_dim_linear</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">cost_const_kwargs</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">train_slope</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">eval_slope</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5</span></em>, <em class="sig-param"><span class="n">x_lower_bound</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">- 10</span></em>, <em class="sig-param"><span class="n">x_upper_bound</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">10</span></em>, <em class="sig-param"><span class="n">diff_threshold</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">iteration_cap</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Flexibility.LinearFlexibleResponseMapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>The linear flexible response mapping class, implements the response mapping for a model whose cost function is linear and
+flexible, i.e. the weights in the cost function are also parameters which change between batches.</p>
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleResponseMapping.create_differential_optimization_problem">
+<code class="sig-name descname">create_differential_optimization_problem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#Flexibility.LinearFlexibleResponseMapping.create_differential_optimization_problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the differentiable optimization problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleResponseMapping.create_optimization_problem">
+<code class="sig-name descname">create_optimization_problem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#Flexibility.LinearFlexibleResponseMapping.create_optimization_problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the non-differentiable optimization problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleResponseMapping.linear_cost_fn_dpp">
+<em class="property">static </em><code class="sig-name descname">linear_cost_fn_dpp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">R</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">Rv</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">scale</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">epsilon</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#Flexibility.LinearFlexibleResponseMapping.linear_cost_fn_dpp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The linear cost function, in dpp form (so that the cvxpy can use it with a parametric weight vector v).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleResponseMapping.linear_cost_fn_dpp_not_batched">
+<em class="property">static </em><code class="sig-name descname">linear_cost_fn_dpp_not_batched</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">r</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">rv</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">scale</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">epsilon</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#Flexibility.LinearFlexibleResponseMapping.linear_cost_fn_dpp_not_batched" title="Permalink to this definition">¶</a></dt>
+<dd><p>The linear cost function, not batched, in dpp form (so that the cvxpy can use it with a parametric weight vector v).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleResponseMapping.solve_differential_optimization_problem">
+<code class="sig-name descname">solve_differential_optimization_problem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">w</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">b</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">nonlinear_score</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X_opt</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#Flexibility.LinearFlexibleResponseMapping.solve_differential_optimization_problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the differentiable optimization problem for the given X, w, b at X_opt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The user’s features, of size (any_batch_size, self.x_dim).</p></li>
+<li><p><strong>w</strong> – The model’s weights, of size (self.x_dim).</p></li>
+<li><p><strong>b</strong> – The model’s bias, of size (1).</p></li>
+<li><p><strong>nonlinear_score</strong> – The nonlinear score of the user’s features, of size (any_batch_size).</p></li>
+<li><p><strong>X_opt</strong> – The calculated optimal X by the non-differentiable problem, of size (any_batch_size, self.x_dim).</p></li>
+<li><p><strong>kwargs</strong> – Any kwargs for the optimization problem.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The optimal features to which the users should move, with tracked gradients w.r.t w, b.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleResponseMapping.solve_optimization_problem">
+<code class="sig-name descname">solve_optimization_problem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">w</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">b</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">nonlinear_score</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#Flexibility.LinearFlexibleResponseMapping.solve_optimization_problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the non-differentiable optimization problem for the given X, w, b.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The user’s features, of size (self.batch_size, self.x_dim).</p></li>
+<li><p><strong>w</strong> – The model’s weights, of size (self.x_dim).</p></li>
+<li><p><strong>b</strong> – The model’s bias, of size (1)</p></li>
+<li><p><strong>nonlinear_score</strong> – The nonlinear score of the user’s features, of size (self.batch_size).</p></li>
+<li><p><strong>kwargs</strong> – Any kwargs for the optimization problem. Should include the slope (train/eval slope).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The optimal features to which the users should move.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="Flexibility.LinearFlexibleStrategicModel">
+<em class="property">class </em><code class="sig-prename descclassname">Flexibility.</code><code class="sig-name descname">LinearFlexibleStrategicModel</code><span class="sig-paren">(</span><em class="sig-param">x_dim: int</em>, <em class="sig-param">batch_size: int</em>, <em class="sig-param">v_init: None._VariableFunctionsClass.tensor</em>, <em class="sig-param">price_fn: Optional[Callable] = None</em>, <em class="sig-param">price_const_kwargs: Optional[Dict[str</em>, <em class="sig-param">Any]] = None</em>, <em class="sig-param">reg: float = 1</em>, <em class="sig-param">mixing_parameter: float = 0.05</em>, <em class="sig-param">cost_scale: float = 1</em>, <em class="sig-param">loss_fn: Callable = &lt;function hinge_loss&gt;</em>, <em class="sig-param">nonlinear_transformation_indices: Optional[List[int]] = None</em>, <em class="sig-param">nonlinear_transformation_fn: Optional[Callable] = None</em>, <em class="sig-param">nonlinear_transformation_output_dimension: int = -1</em>, <em class="sig-param">utility_reg: Optional[float] = None</em>, <em class="sig-param">burden_reg: Optional[float] = None</em>, <em class="sig-param">recourse_reg: Optional[float] = None</em>, <em class="sig-param">social_measure_dict: Optional[Dict] = None</em>, <em class="sig-param">train_slope: float = 1</em>, <em class="sig-param">eval_slope: float = 5</em>, <em class="sig-param">x_lower_bound: float = -10</em>, <em class="sig-param">x_upper_bound: float = 10</em>, <em class="sig-param">diff_threshold: float = 0.001</em>, <em class="sig-param">iteration_cap: int = 100</em>, <em class="sig-param">strategic: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#Flexibility.LinearFlexibleStrategicModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>The linear flexible strategic model class, implements the strategic model for a model whose cost function is linear and
+flexible, i.e. the weights in the cost function are learnable and change between iterations (using a price function for the
+price of changing the cost function).</p>
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleStrategicModel.default_price_fn">
+<em class="property">static </em><code class="sig-name descname">default_price_fn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">v_init</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#Flexibility.LinearFlexibleStrategicModel.default_price_fn" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default price function for changing the cost weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> – The current weight vector.</p></li>
+<li><p><strong>v_init</strong> – The initial weight vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The price to change from v_init to v.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleStrategicModel.get_batch_data_for_saving">
+<code class="sig-name descname">get_batch_data_for_saving</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">epoch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X_opt</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y_pred</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#Flexibility.LinearFlexibleStrategicModel.get_batch_data_for_saving" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the batch data in the saving format (dictionary of entries to save for each row in X, X_opt, etc.).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epoch</strong> – The epoch number.</p></li>
+<li><p><strong>batch</strong> – The batch number.</p></li>
+<li><p><strong>X</strong> – The users’ features.</p></li>
+<li><p><strong>X_opt</strong> – The users’ responses.</p></li>
+<li><p><strong>Y</strong> – The users’ ground-truth classes.</p></li>
+<li><p><strong>Y_pred</strong> – The model’s prediction of the users’ classes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The data in the saving format.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleStrategicModel.loss">
+<code class="sig-name descname">loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Y</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">Y_pred</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">X_opt</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#Flexibility.LinearFlexibleStrategicModel.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the loss of the model’s prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Y</strong> – The real classification of the input.</p></li>
+<li><p><strong>Y_pred</strong> – The model’s classification of the input.</p></li>
+<li><p><strong>X</strong> – The input.</p></li>
+<li><p><strong>X_opt</strong> – The response of the input, as computed in the forward step.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The loss of the model’s classification.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Flexibility.LinearFlexibleStrategicModel.optimize_X">
+<code class="sig-name descname">optimize_X</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">None._VariableFunctionsClass.tensor</span></em>, <em class="sig-param"><span class="n">requires_grad</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; None._VariableFunctionsClass.tensor<a class="headerlink" href="#Flexibility.LinearFlexibleStrategicModel.optimize_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given the users’ features X, returns the optimal X to which the users should move. Directly calls the response
+mapping’s optimize_X method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The users’ features.</p></li>
+<li><p><strong>requires_grad</strong> – Whether the results should track gradients w.r.t the model’s parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The optimal response for X w.r.t the current model parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="Flexibility.tensor">
+<code class="sig-prename descclassname">Flexibility.</code><code class="sig-name descname">tensor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">requires_grad</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">pin_memory</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Tensor<a class="headerlink" href="#Flexibility.tensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a tensor with <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.tensor()</span></code> always copies <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>. If you have a Tensor
+<code class="docutils literal notranslate"><span class="pre">data</span></code> and want to avoid a copy, use <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.requires_grad_()</span></code>
+or <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.detach()</span></code>.
+If you have a NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> and want to avoid a copy, use
+<code class="xref py py-func docutils literal notranslate"><span class="pre">torch.as_tensor()</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When data is a tensor <cite>x</cite>, <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.tensor()</span></code> reads out ‘the data’ from whatever it is passed,
+and constructs a leaf variable. Therefore <code class="docutils literal notranslate"><span class="pre">torch.tensor(x)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">x.clone().detach()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">torch.tensor(x,</span> <span class="pre">requires_grad=True)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">x.clone().detach().requires_grad_(True)</span></code>.
+The equivalents using <code class="docutils literal notranslate"><span class="pre">clone()</span></code> and <code class="docutils literal notranslate"><span class="pre">detach()</span></code> are recommended.</p>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data (array_like): Initial data for the tensor. Can be a list, tuple,</dt><dd><p>NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, scalar, and other types.</p>
+</dd>
+</dl>
+</dd>
+<dt>Keyword args:</dt><dd><dl class="simple">
+<dt>dtype (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.dtype</span></code>, optional): the desired data type of returned tensor.</dt><dd><p>Default: if <code class="docutils literal notranslate"><span class="pre">None</span></code>, infers data type from <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+<dt>device (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>, optional): the desired device of returned tensor.</dt><dd><p>Default: if <code class="docutils literal notranslate"><span class="pre">None</span></code>, uses the current device for the default tensor type
+(see <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.set_default_tensor_type()</span></code>). <code class="xref py py-attr docutils literal notranslate"><span class="pre">device</span></code> will be the CPU
+for CPU tensor types and the current CUDA device for CUDA tensor types.</p>
+</dd>
+<dt>requires_grad (bool, optional): If autograd should record operations on the</dt><dd><p>returned tensor. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>pin_memory (bool, optional): If set, returned tensor would be allocated in</dt><dd><p>the pinned memory. Works only for CPU tensors. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.9</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">]])</span>
+<span class="go">tensor([[ 0.1000,  1.2000],</span>
+<span class="go">        [ 2.2000,  3.1000],</span>
+<span class="go">        [ 4.9000,  5.2000]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Type inference on data</span>
+<span class="go">tensor([ 0,  1])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.11111</span><span class="p">,</span> <span class="mf">0.222222</span><span class="p">,</span> <span class="mf">0.3333333</span><span class="p">]],</span>
+<span class="gp">... </span>             <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">device</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda:0&#39;</span><span class="p">))</span>  <span class="c1"># creates a torch.cuda.DoubleTensor</span>
+<span class="go">tensor([[ 0.1111,  0.2222,  0.3333]], dtype=torch.float64, device=&#39;cuda:0&#39;)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">)</span>  <span class="c1"># Create a scalar (zero-dimensional tensor)</span>
+<span class="go">tensor(3.1416)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([])</span>  <span class="c1"># Create an empty tensor (of size (0,))</span>
+<span class="go">tensor([])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="VanillaVsHardt_orig.html" class="btn btn-neutral float-left" title="Vanilla vs Hardt" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Sagi Levanon, Nir Rosenfeld, Yehonatan Assaf, Michael Makhlevich.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

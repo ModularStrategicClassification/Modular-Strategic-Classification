@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to SCMP’s documentation! &mdash; SCMP 0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Welcome to Plato - Strategic Classification Made Practical’s documentation! &mdash; Plato - Strategic Classification Made Practical 0.9 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="lib" href="modules.html" /> 
+    <link rel="next" title="Tutorial" href="how-to-use.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -26,7 +27,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> SCMP
+            <a href="#" class="icon icon-home"> Plato - Strategic Classification Made Practical
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -36,9 +37,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">lib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-to-use.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code</a></li>
 </ul>
 
         </div>
@@ -47,7 +50,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">SCMP</a>
+          <a href="#">Plato - Strategic Classification Made Practical</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -55,7 +58,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Welcome to SCMP’s documentation!</li>
+      <li>Welcome to Plato - Strategic Classification Made Practical’s documentation!</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -65,41 +68,88 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-scmp-s-documentation">
-<h1>Welcome to SCMP’s documentation!<a class="headerlink" href="#welcome-to-scmp-s-documentation" title="Permalink to this headline"></a></h1>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<img alt="_images/Plato_Codes.png" src="_images/Plato_Codes.png" />
+<div class="section" id="welcome-to-plato-strategic-classification-made-practical-s-documentation">
+<h1>Welcome to Plato - Strategic Classification Made Practical’s documentation!<a class="headerlink" href="#welcome-to-plato-strategic-classification-made-practical-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Welcome to Plato – currently a practical strategic classification framework with the aspiration to expand into everything which is a machine learning human interactions tool kit 👨 ❤️ 🤖</p>
+<p>Plato is based on Sagi Levanon and Nir Rosenfeld’s <a class="reference external" href="https://arxiv.org/pdf/2103.01826.pdf">&quot;Strategic Classification Made Practical&quot;</a> paper and implements the suggested model in an easy-to-use, fast, and modular-to-change manner.</p>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">lib</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="CommonDefinitions.html">CommonDefinitions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ResponseMapping.html">ResponseMapping module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SocialMeasures.html">SocialMeasures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="StrategicModel.html">StrategicModel module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-to-use.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="how-to-use.html#required-imports">Required Imports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to-use.html#data-prepration">Data Prepration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to-use.html#out-of-the-box-strategic-classification">Out of the box Strategic Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to-use.html#modifiable-strategic-classification">Modifiable Strategic Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to-use.html#add-ons">Add ons</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Vanilla.html">Vanilla</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VanillaVsHardt.html">Vanilla vs Hardt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Recourse.html">Recourse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Burden.html">Burden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utility.html">Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flexibility.html">Flexibility Around Cost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PlatoDemo.html">Plato Demo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code.html#module-StrategicModel">StrategicModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#module-ResponseMapping">ResponseMapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#module-Flexibility">Add-ons | Flexibility</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-</section>
+</div>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-right" title="lib" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="how-to-use.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021, Nir.</p>
+    <p>&#169; Copyright 2021, Sagi Levanon, Nir Rosenfeld, Yehonatan Assaf, Michael Makhlevich.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
